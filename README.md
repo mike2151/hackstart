@@ -9,7 +9,25 @@ The project created includes:
  - autoload
  - HHast
 
-## Installation
+## Installation (Only Supports Linux and MacOS currently)
+
+### Download/Clone The Repo And Place In Bin
+
+Download or clone the repo:
+`git clone https://github.com/mike2151/hackstart.git`
+
+Move the file to bin:
+`cp hackstart/bin/hackstart /usr/local/bin`
+
+Then, you can access the tool by typing: `hackstart` in a command line
+
+### Homebrew
+
+`brew tap mike2151/tap`
+
+`brew install hackstart`
+
+Then, you can access the tool by typing: `hackstart` in a command line
 
 ## Usage:
 
