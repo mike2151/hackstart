@@ -1,0 +1,86 @@
+#!/bin/bash
+
+FIRST_ARG=$1
+
+if [ "$FIRST_ARG" = "" ]; then
+    echo -e "No app name specified. Usage: hackstart [NAME_OF_APP]"
+    exit 1;
+fi
+
+
+if [ "$FIRST_ARG" = "-help" ] || [ "$FIRST_ARG" = "-h" ]; then
+    HELP_TEXT="Usage:\n 
+    hackstart [NAME_OF_APP] : creates a Hack project with name NAME_OF_APP. \n
+    "
+    echo -e $HELP_TEXT
+    exit 0;
+fi
+
+
+# check composer
+command_exists () {
+    type "$1" &> /dev/null ;
+}
+
+if ! command_exists composer; then
+  echo 'Error running composer: composer is not installed or is not in your path' >&2
+  exit 1
+fi
+
+# make the project
+
+mkdir $FIRST_ARG
+
+# .gitignore
+GITIGNORE_CONTENTS="# General Gitignore\n
+.DS_Store\n
+.AppleDouble\n
+.LSOverride\n
+_site/\n
+*.swo\n
+*.swp\n
+_site\n
+.sass-cache\n
+*.psd\n
+*~\n
+\n
+# Hack Specific\n
+composer.phar\n
+/vendor/\n
+*.hhast.parser-cache\n
+"
+echo -e $GITIGNORE_CONTENTS >> $FIRST_ARG/.gitignore
+
+# hh config
+touch $FIRST_ARG/.hhconfig
+
+# folders
+mkdir $FIRST_ARG/src 
+mkdir $FIRST_ARG/tests
+
+# autoload
+AUTOLOAD_CONTENTS='{\n
+  "roots": [\n
+    "src/"\n
+  ],\n
+  "devRoots": [\n
+    "tests/"\n
+  ]\n
+}'
+
+
+echo -e $AUTOLOAD_CONTENTS >> $FIRST_ARG/hh_autoload.json
+
+# hhast 
+HHAST_LINT_CONTENTS='
+{\n
+  "roots": [ "src/", "tests/" ]\n
+}
+'
+
+echo -e $HHAST_LINT_CONTENTS >> $FIRST_ARG/hhast-lint.json
+
+# install composer deps 
+cd $FIRST_ARG
+composer require hhvm/hsl hhvm/hacktest facebook/fbexpect hhvm/hhvm-autoload hhvm/hhast
+cd ../
