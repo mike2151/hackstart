@@ -32,23 +32,7 @@ fi
 mkdir $FIRST_ARG
 
 # .gitignore
-GITIGNORE_CONTENTS="# General Gitignore\n
-.DS_Store\n
-.AppleDouble\n
-.LSOverride\n
-_site/\n
-*.swo\n
-*.swp\n
-_site\n
-.sass-cache\n
-*.psd\n
-*~\n
-\n
-# Hack Specific\n
-composer.phar\n
-/vendor/\n
-*.hhast.parser-cache\n
-"
+GITIGNORE_CONTENTS="# General Gitignore\n.DS_Store\n.AppleDouble\n.LSOverride\n_site/\n*.swo\n*.swp\n_site\n.sass-cache\n*.psd\n*~\n\n# Hack Specific\ncomposer.phar\n/vendor/\n*.hhast.parser-cache\n"
 echo -e $GITIGNORE_CONTENTS >> $FIRST_ARG/.gitignore
 
 # hh config
