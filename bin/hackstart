@@ -46,7 +46,7 @@ _site\n
 \n
 # Hack Specific\n
 composer.phar\n
-/vendor/\n
+vendor/*\n
 *.hhast.parser-cache\n
 "
 echo -e $GITIGNORE_CONTENTS >> $FIRST_ARG/.gitignore
