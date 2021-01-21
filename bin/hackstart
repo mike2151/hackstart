@@ -38,6 +38,9 @@ echo -e $GITIGNORE_CONTENTS >> $FIRST_ARG/.gitignore
 # hh config
 touch $FIRST_ARG/.hhconfig
 
+HHCONFIG_CONTENTS="ignored_paths = [ 'vendor/*' ]"
+echo -e $HHCONFIG_CONTENTS >> $FIRST_ARG/.hhconfig
+
 # folders
 mkdir $FIRST_ARG/src 
 mkdir $FIRST_ARG/tests
